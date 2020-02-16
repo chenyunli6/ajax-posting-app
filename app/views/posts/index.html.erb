@@ -1,4 +1,5 @@
-<div>
+
+<div class="row">
   <%= form_for Post.new, :remote => true do |f| %>
     <div class="form-group">
       <%= f.text_area :content, :class => "form-control" %>
@@ -7,14 +8,18 @@
       <%= f.submit :class => "btn btn-primary" %>
     </div>
   <% end %>
+</div>
+<div class="row">
   <div id="post-list">
     <% @posts.each do |post| %>
       <%= render :partial => "post", :locals => { :post => post } %>
 
-      <div id="post-<%= post.id %>" class="panel panel-default">
-        <div class="panel-heading"><%= post.user.display_name %></div>
-        <div class="panel-body">
-          <%= post.content %>
+      <div id="post-<%= post.id %>" class="card">
+        <div class="card-body">
+          <div class="card-title"><%= post.user.display_name %></div>
+          <p class="card-text">
+            <%= post.content %>
+          </p>
           <% if current_user && post.user == current_user %>
             <p class="text-right">
               <%= link_to "Delete", post_path(post), :method => :delete, :remote => true, :class => "btn btn-danger" %>
@@ -24,4 +29,4 @@
       </div>
     <% end %>
   </div>
-<div>
+</div>
