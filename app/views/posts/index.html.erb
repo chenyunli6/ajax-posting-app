@@ -79,7 +79,8 @@
   });
 
    $("#post-list").on('change', ".select_category", function(){
-     var url = $(this).data("url");
+     var that = this;
+     var url = $(that).data("url");
 
      $.ajax({
        url: url,
@@ -87,8 +88,14 @@
        dataType: "json",
        data: {
          post: {
-           category_id: $(this).val()
+           category_id: $(that).val()
          }
+       },
+       beforeSend: function(){
+         $(that).after( $(' <img src="/images/ajax-loader.gif" id="ajax-loading"> ') );
+       },
+       complete: function(){
+         $("#ajax-loading").remove();
        }
      });
    });
