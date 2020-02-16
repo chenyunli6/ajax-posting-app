@@ -1,0 +1,20 @@
+<script>
+  $(function() {
+    $("#my-click").click(function(){
+      $("#foo").html('<h1>zoo html</h1>');
+      $("#foo").text('<h1>zoo text</h1>');
+      $("#foo").prepend('<h1>zoo prepend</h1>');
+      $("#foo").append('<h1>zoo append</h1>');
+      $("#foo").before('<h1>zoo before</h1>');
+      $("#foo").after('<h1>zoo after</h1>');
+    });
+  });
+</script>
+
+<p>
+  <a id="my-click">Click Me</a>
+</p>
+
+<div id="foo" style="border: 1px solid red;">
+  <p>bar</p>
+</div>
