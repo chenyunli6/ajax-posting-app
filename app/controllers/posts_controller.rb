@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, :only => [:create, :destroy]
+  protect_from_forgery except: [:destroy]
 
   def index
     @posts = Post.order("id DESC").limit(10)    # 新贴文放前面
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
   def destroy
     @post = current_user.posts.find(params[:id]) # 只能删除自己的贴文
     @post.destroy
+    render :json => { :id => @post.id }
   end
 
   def like
